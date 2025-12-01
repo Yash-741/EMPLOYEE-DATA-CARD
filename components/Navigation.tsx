@@ -40,13 +40,19 @@ export default function Navigation() {
                                 key={link.href}
                                 href={link.href}
                                 className={`px-4 py-2 rounded-md font-medium transition-all ${pathname === link.href
-                                        ? 'bg-blue-600 text-white'
-                                        : 'text-gray-700 hover:bg-gray-100'
+                                    ? 'bg-blue-600 text-white'
+                                    : 'text-gray-700 hover:bg-gray-100'
                                     }`}
                             >
                                 {link.label}
                             </Link>
                         ))}
+                        <Link
+                            href="/admin"
+                            className="ml-2 px-4 py-2 rounded-md font-medium transition-all bg-gradient-to-r from-yellow-500 to-yellow-600 text-white hover:from-yellow-600 hover:to-yellow-700"
+                        >
+                            🔐 Admin
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -88,8 +94,8 @@ export default function Navigation() {
                                 key={link.href}
                                 href={link.href}
                                 className={`block px-4 py-3 rounded-md font-medium transition-all ${pathname === link.href
-                                        ? 'bg-blue-600 text-white'
-                                        : 'text-gray-700 hover:bg-gray-100'
+                                    ? 'bg-blue-600 text-white'
+                                    : 'text-gray-700 hover:bg-gray-100'
                                     }`}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
