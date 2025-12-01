@@ -35,7 +35,7 @@ export default function AdminLogin() {
             <div className="max-w-md w-full mx-4">
                 {/* Logo and Title */}
                 <div className="text-center mb-8">
-                    <div className="edc-emblem mx-auto mb-4" style={{ width: '80px', height: '80px', fontSize: '2rem', background: 'white', color: 'var(--edc-primary)' }}>
+                    <div className="edc-emblem mx-auto mb-4" style={{ width: '80px', height: '80px', fontSize: '2rem', background: 'rgba(255, 255, 255, 0.9)', color: 'var(--edc-primary)' }}>
                         EDC
                     </div>
                     <h1 className="text-3xl font-bold text-white mb-2">Admin Portal</h1>
@@ -43,7 +43,7 @@ export default function AdminLogin() {
                 </div>
 
                 {/* Login Card */}
-                <div className="bg-white rounded-lg shadow-xl p-8">
+                <div className="edc-glass-card rounded-lg shadow-xl p-8">
                     <h2 className="text-2xl font-bold mb-6 text-center" style={{ color: 'var(--edc-primary)' }}>
                         Administrator Login
                     </h2>

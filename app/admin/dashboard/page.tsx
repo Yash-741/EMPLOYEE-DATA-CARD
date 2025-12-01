@@ -42,7 +42,7 @@ export default function AdminDashboard() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Admin Header */}
-            <div className="bg-white shadow-md border-b-4" style={{ borderColor: 'var(--edc-gold)' }}>
+            <div className="edc-glass-surface shadow-md border-b-4 sticky top-0 z-50" style={{ borderColor: 'var(--edc-gold)' }}>
                 <div className="edc-container">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-3">

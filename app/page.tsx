@@ -60,7 +60,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="edc-section bg-white relative z-10">
+      <section id="features" className="edc-section relative z-10">
         <div className="edc-container">
           <h2 className="text-4xl font-bold text-center mb-16" style={{ color: 'var(--edc-primary)' }}>
             Key Features
@@ -104,7 +104,7 @@ export default function Home() {
                 gradient: "linear-gradient(135deg, #f39c12, var(--edc-warning))"
               }
             ].map((feature, index) => (
-              <div key={index} className="text-center p-8 rounded-2xl hover:bg-gray-50 transition-colors hover-lift group">
+              <div key={index} className="edc-glass-card text-center p-8 rounded-2xl hover:bg-white/40 transition-colors hover-lift group">
                 <div
                   className="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-lg transform group-hover:rotate-6 transition-transform duration-300"
                   style={{ background: feature.gradient }}
@@ -134,7 +134,7 @@ export default function Home() {
               transparency.
             </p>
             <div className="grid md:grid-cols-2 gap-8 text-left">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-colors">
+              <div className="edc-glass-surface bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-colors">
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <span className="text-3xl">👨‍💼</span> For Employees
                 </h3>
@@ -153,7 +153,7 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-colors">
+              <div className="edc-glass-surface bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-colors">
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <span className="text-3xl">🏢</span> For Employers
                 </h3>
@@ -180,7 +180,7 @@ export default function Home() {
       <section className="edc-section relative overflow-hidden">
         <div className="absolute inset-0 bg-blue-50/50 -z-10"></div>
         <div className="edc-container text-center">
-          <div className="max-w-3xl mx-auto bg-white rounded-3xl p-12 shadow-xl border border-blue-100 relative overflow-hidden">
+          <div className="max-w-3xl mx-auto edc-glass-card rounded-3xl p-12 shadow-xl border border-blue-100 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-50 -mr-32 -mt-32"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold-100 rounded-full blur-3xl opacity-50 -ml-32 -mb-32"></div>
 
