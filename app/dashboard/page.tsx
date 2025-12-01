@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { EmployeeProfile } from '@/types';
 import { getEmployeeProfile } from '@/services/edcService';
 import EDCCard from '@/components/EDCCard';
+import Skeleton from '@/components/Skeleton';
+import AnimatedCounter from '@/components/AnimatedCounter';
 
 export default function Dashboard() {
     const [profile, setProfile] = useState<EmployeeProfile | null>(null);
@@ -22,10 +24,23 @@ export default function Dashboard() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading dashboard...</p>
+            <div className="min-h-screen py-8">
+                <div className="edc-container">
+                    <div className="mb-8">
+                        <Skeleton width="200px" height="40px" className="mb-2" />
+                        <Skeleton width="300px" height="20px" />
+                    </div>
+                    <div className="grid md:grid-cols-4 gap-6 mb-8">
+                        {[1, 2, 3, 4].map(i => (
+                            <div key={i} className="edc-paper">
+                                <Skeleton width="60px" height="36px" className="mx-auto mb-2" />
+                                <Skeleton width="100px" height="20px" className="mx-auto" />
+                            </div>
+                        ))}
+                    </div>
+                    <div className="mb-8">
+                        <Skeleton width="100%" height="400px" className="rounded-xl" />
+                    </div>
                 </div>
             </div>
         );
@@ -63,7 +78,7 @@ export default function Dashboard() {
     return (
         <div className="min-h-screen py-8">
             <div className="edc-container">
-                <div className="mb-8">
+                <div className="mb-8 fade-in-down">
                     <h1 className="text-4xl font-bold mb-2" style={{ color: 'var(--edc-primary)' }}>
                         Dashboard
                     </h1>
@@ -73,10 +88,10 @@ export default function Dashboard() {
                 </div>
 
                 {/* Stats Overview */}
-                <div className="grid md:grid-cols-4 gap-6 mb-8">
-                    <div className="edc-paper text-center">
+                <div className="grid md:grid-cols-4 gap-6 mb-8 fade-in-up stagger-1">
+                    <div className="edc-paper text-center hover-lift">
                         <div className="text-3xl font-bold mb-2" style={{ color: 'var(--edc-primary)' }}>
-                            {profile.profileCompletion}%
+                            <AnimatedCounter end={profile.profileCompletion} suffix="%" />
                         </div>
                         <p className="text-gray-600">Profile Complete</p>
                         <div className="edc-progress-container mt-3">
@@ -87,23 +102,23 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="edc-paper text-center">
+                    <div className="edc-paper text-center hover-lift">
                         <div className="text-3xl font-bold mb-2" style={{ color: 'var(--edc-success)' }}>
-                            {verificationCount}/3
+                            <AnimatedCounter end={verificationCount} suffix="/3" />
                         </div>
                         <p className="text-gray-600">Verifications Complete</p>
                     </div>
 
-                    <div className="edc-paper text-center">
+                    <div className="edc-paper text-center hover-lift">
                         <div className="text-3xl font-bold mb-2" style={{ color: 'var(--edc-gold-dark)' }}>
-                            {profile.workExperience.length}
+                            <AnimatedCounter end={profile.workExperience.length} />
                         </div>
                         <p className="text-gray-600">Work Experiences</p>
                     </div>
 
-                    <div className="edc-paper text-center">
+                    <div className="edc-paper text-center hover-lift">
                         <div className="text-3xl font-bold mb-2" style={{ color: 'var(--edc-info)' }}>
-                            {profile.education.length}
+                            <AnimatedCounter end={profile.education.length} />
                         </div>
                         <p className="text-gray-600">Education Records</p>
                     </div>
