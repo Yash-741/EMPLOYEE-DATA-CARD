@@ -2,17 +2,26 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { EmployeeProfile } from '@/types';
 import { getEmployeeProfile } from '@/services/edcService';
+import { isAuthenticated } from '@/services/authService';
 import EDCCard from '@/components/EDCCard';
 import Skeleton from '@/components/Skeleton';
 import AnimatedCounter from '@/components/AnimatedCounter';
 
 export default function Dashboard() {
+    const router = useRouter();
     const [profile, setProfile] = useState<EmployeeProfile | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        // Check authentication
+        if (!isAuthenticated()) {
+            router.push('/login');
+            return;
+        }
+
         const loadProfile = () => {
             const data = getEmployeeProfile();
             setProfile(data);
@@ -20,7 +29,7 @@ export default function Dashboard() {
         };
 
         loadProfile();
-    }, []);
+    }, [router]);
 
     if (loading) {
         return (

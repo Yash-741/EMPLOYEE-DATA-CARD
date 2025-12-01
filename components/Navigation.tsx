@@ -1,23 +1,41 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { isAuthenticated, logoutUser } from '@/services/authService';
 
 export default function Navigation() {
     const pathname = usePathname();
+    const router = useRouter();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const navLinks = [
+    useEffect(() => {
+        setIsLoggedIn(isAuthenticated());
+    }, [pathname]); // Re-check auth on route change
+
+    const handleLogout = () => {
+        logoutUser();
+        setIsLoggedIn(false);
+        router.push('/login');
+    };
+
+    const publicLinks = [
         { href: '/', label: 'Home' },
+    ];
+
+    const protectedLinks = [
         { href: '/dashboard', label: 'Dashboard' },
         { href: '/profile', label: 'Profile' },
         { href: '/verification', label: 'Verification' },
         { href: '/blockchain', label: 'Blockchain' },
     ];
 
+    const navLinks = isLoggedIn ? [...publicLinks, ...protectedLinks] : publicLinks;
+
     return (
-        <nav className="bg-white shadow-md sticky top-0 z-50">
+        <nav className="edc-glass-surface shadow-md sticky top-0 z-50 backdrop-blur-md bg-white/80">
             <div className="edc-container">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
@@ -40,16 +58,33 @@ export default function Navigation() {
                                 key={link.href}
                                 href={link.href}
                                 className={`px-4 py-2 rounded-md font-medium transition-all ${pathname === link.href
-                                    ? 'bg-blue-600 text-white'
+                                    ? 'bg-blue-600 text-white shadow-md'
                                     : 'text-gray-700 hover:bg-gray-100'
                                     }`}
                             >
                                 {link.label}
                             </Link>
                         ))}
+
+                        {isLoggedIn ? (
+                            <button
+                                onClick={handleLogout}
+                                className="ml-2 px-4 py-2 rounded-md font-medium transition-all text-red-600 hover:bg-red-50"
+                            >
+                                Logout
+                            </button>
+                        ) : (
+                            <Link
+                                href="/login"
+                                className="ml-2 px-4 py-2 rounded-md font-medium transition-all bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg"
+                            >
+                                Login
+                            </Link>
+                        )}
+
                         <Link
                             href="/admin"
-                            className="ml-2 px-4 py-2 rounded-md font-medium transition-all bg-gradient-to-r from-yellow-500 to-yellow-600 text-white hover:from-yellow-600 hover:to-yellow-700"
+                            className="ml-2 px-4 py-2 rounded-md font-medium transition-all bg-gradient-to-r from-yellow-500 to-yellow-600 text-white hover:from-yellow-600 hover:to-yellow-700 shadow-md hover:shadow-lg"
                         >
                             🔐 Admin
                         </Link>
@@ -102,6 +137,32 @@ export default function Navigation() {
                                 {link.label}
                             </Link>
                         ))}
+                        {isLoggedIn ? (
+                            <button
+                                onClick={() => {
+                                    handleLogout();
+                                    setMobileMenuOpen(false);
+                                }}
+                                className="block w-full text-left px-4 py-3 rounded-md font-medium transition-all text-red-600 hover:bg-red-50"
+                            >
+                                Logout
+                            </button>
+                        ) : (
+                            <Link
+                                href="/login"
+                                className="block px-4 py-3 rounded-md font-medium transition-all text-blue-600 hover:bg-blue-50"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Login
+                            </Link>
+                        )}
+                        <Link
+                            href="/admin"
+                            className="block px-4 py-3 rounded-md font-medium transition-all text-yellow-600 hover:bg-yellow-50"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            Admin Portal
+                        </Link>
                     </div>
                 )}
             </div>

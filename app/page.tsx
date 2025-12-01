@@ -191,7 +191,7 @@ export default function Home() {
               Join the future of verified employment credentials. Create your EDC in minutes and
               experience the difference.
             </p>
-            <Link href="/dashboard" className="edc-button edc-button-gold text-lg px-10 py-4 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all relative z-10 inline-block">
+            <Link href="/login" className="edc-button edc-button-gold text-lg px-10 py-4 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all relative z-10 inline-block">
               Create Your EDC →
             </Link>
           </div>
